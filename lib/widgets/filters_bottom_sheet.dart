@@ -8,6 +8,7 @@ void showFiltersBottomSheet(
 }) {
   showModalBottomSheet(
     context: context,
+    useRootNavigator: true,
     backgroundColor: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
@@ -36,7 +37,7 @@ class _FiltersBottomSheetContentState
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,

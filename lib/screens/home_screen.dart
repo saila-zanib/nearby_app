@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../widgets/filters_bottom_sheet.dart';
+import 'search_result_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -187,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(height: 20.h),
 
-              // Search bar (tappable -> Search/filter result)
+              // Search bar (tappable -> Search Result screen)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 26.w),
                 child: Container(
@@ -206,7 +207,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // TODO: Navigate to Search/filter result once built
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const SearchResultScreen(),
+                            ),
+                          );
                         },
                         child: SvgPicture.asset(
                           'assets/icons/search_icon.svg',
@@ -222,7 +229,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to Search/filter result once built
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SearchResultScreen(),
+                              ),
+                            );
                           },
                           child: Text(
                             "Search for cleaning services...",
@@ -266,7 +279,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _sectionHeader(
                   "Categories",
                   onSeeAll: () {
-                    // TODO: Navigate to Search result once built
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchResultScreen(),
+                      ),
+                    );
                   },
                 ),
               ),

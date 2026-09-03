@@ -13,12 +13,19 @@ class MainNavScreen extends StatefulWidget {
 
 class _MainNavScreenState extends State<MainNavScreen> {
   int _currentIndex = 0;
+  final GlobalKey<NavigatorState> _homeNavigatorKey =
+      GlobalKey<NavigatorState>();
 
-  final List<Widget> _tabs = const [
-    HomeScreen(),
-    _PlaceholderTab(label: "Bookings"),
-    _PlaceholderTab(label: "Favorites"),
-    _PlaceholderTab(label: "Profile"),
+  late final List<Widget> _tabs = [
+    Navigator(
+      key: _homeNavigatorKey,
+      onGenerateRoute: (settings) => MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+    ),
+    const _PlaceholderTab(label: "Bookings"),
+    const _PlaceholderTab(label: "Favorites"),
+    const _PlaceholderTab(label: "Profile"),
   ];
 
   final List<_NavItem> _navItems = const [
@@ -74,8 +81,9 @@ class _MainNavScreenState extends State<MainNavScreen> {
             children: List.generate(_navItems.length, (index) {
               final isSelected = _currentIndex == index;
               final item = _navItems[index];
-              final iconColor =
-                  isSelected ? const Color(0xFF95D041) : const Color(0xFF212121);
+              final iconColor = isSelected
+                  ? const Color(0xFF95D041)
+                  : const Color(0xFF212121);
               return GestureDetector(
                 onTap: () => setState(() => _currentIndex = index),
                 behavior: HitTestBehavior.opaque,
@@ -95,7 +103,6 @@ class _MainNavScreenState extends State<MainNavScreen> {
                       SizedBox(height: 4.h),
                       Text(
                         item.label,
-                        // TODO: switch to Quicksand once font files are added
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 11.57.sp,
