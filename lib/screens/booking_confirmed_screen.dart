@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
-import 'booking_confirmed_screen.dart';
 
-class BookingSummaryScreen extends StatelessWidget {
-  const BookingSummaryScreen({super.key});
+class BookingConfirmedScreen extends StatelessWidget {
+  const BookingConfirmedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class BookingSummaryScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      "Booking Summary",
+                      "Booking Confirmed",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -47,63 +46,51 @@ class BookingSummaryScreen extends StatelessWidget {
                 ],
               ),
 
-              SizedBox(height: 16.h),
+              SizedBox(height: 24.h),
 
-              // Provider info card
-              Container(
-                width: 330.w,
-                height: 107.h,
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              // Success message block
+              Center(
+                child: Column(
                   children: [
-                    Image.asset(
-                      'assets/images/freshnest_booking_summary.png',
-                      width: 83.w,
-                      height: 107.h,
-                      fit: BoxFit.fill,
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/success_bg.svg',
+                          width: 102.w,
+                          height: 102.w,
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/success_tick.svg',
+                          width: 37.52.w,
+                          height: 26.97.h,
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 22.w),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 12.h,
-                          bottom: 12.h,
-                          right: 47.w,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "FreshNest Cleaning",
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                                height: 1.5,
-                                letterSpacing: -0.01,
-                                color: const Color(0xFF1B1A1F),
-                              ),
-                            ),
-                            SizedBox(height: 6.h),
-                            Text(
-                              "House Cleaning Service",
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                height: 1.5,
-                                letterSpacing: -0.01,
-                                color: const Color(0xFF7D7D7D),
-                              ),
-                            ),
-                          ],
-                        ),
+                    SizedBox(height: 20.h),
+                    Text(
+                      "Booking Confirmed",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w500,
+                        height: 1.5,
+                        letterSpacing: -0.01,
+                        color: const Color(0xFF1B1A1F),
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      "Your booking has been confirmed\nsuccessfully.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        height: 1.54,
+                        letterSpacing: 0.01,
+                        color: const Color(0xFF7E7E93),
                       ),
                     ),
                   ],
@@ -114,7 +101,7 @@ class BookingSummaryScreen extends StatelessWidget {
 
               // Booking details card
               Container(
-                width: 336.5.w,
+                width: 343.5.w,
                 padding: EdgeInsets.symmetric(
                   horizontal: 25.w,
                   vertical: 32.h,
@@ -160,16 +147,10 @@ class BookingSummaryScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const BookingConfirmedScreen(),
-                      ),
-                    );
+                    // TODO: Navigate to My Bookings once built
                   },
                   child: Text(
-                    "Confirm Booking",
+                    "View Booking",
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 16.sp,
