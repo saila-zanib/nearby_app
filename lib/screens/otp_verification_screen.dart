@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import '../widgets/main_nav_screen.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({super.key});
@@ -20,7 +21,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void _onChanged(String value) {
     setState(() {});
     if (value.length == 6) {
-      // TODO: Navigate to Verification Success once built
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MainNavScreen(),
+        ),
+        (route) => false,
+      );
     }
   }
 
@@ -277,7 +284,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       elevation: 0,
                     ),
                     onPressed: () {
-                      // TODO: Navigate to Verification Success once built
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainNavScreen(),
+                        ),
+                        (route) => false,
+                      );
                     },
                     child: Text(
                       "Verify",
