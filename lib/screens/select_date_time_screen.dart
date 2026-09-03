@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import 'booking_summary_screen.dart';
 
 class SelectDateTimeScreen extends StatefulWidget {
   const SelectDateTimeScreen({super.key});
@@ -296,7 +297,12 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    // TODO: Navigate to Booking summary/confirmation once built
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BookingSummaryScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     "Continue",
