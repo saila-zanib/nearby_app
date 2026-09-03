@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import 'reviews_screen.dart';
+import 'photo_gallery_screen.dart';
 
 class ProviderProfileScreen extends StatelessWidget {
   const ProviderProfileScreen({super.key});
@@ -282,7 +283,13 @@ class ProviderProfileScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to Photo gallery once built
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const PhotoGalleryScreen(),
+                              ),
+                            );
                           },
                           child: Text(
                             "See all",
