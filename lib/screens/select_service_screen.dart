@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import 'select_date_time_screen.dart';
 
 class SelectServiceScreen extends StatefulWidget {
   const SelectServiceScreen({super.key});
@@ -286,7 +287,13 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    // TODO: Navigate to Date & time once built
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const SelectDateTimeScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     "Continue",
