@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import '../widgets/filters_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -189,25 +190,25 @@ class _HomeScreenState extends State<HomeScreen> {
               // Search bar (tappable -> Search/filter result)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 26.w),
-                child: GestureDetector(
-                  onTap: () {
-                    // TODO: Navigate to Search/filter result once built
-                  },
-                  child: Container(
-                    width: 327.w,
-                    height: 53.h,
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: const Color(0xFFE8E9EC),
-                        width: 1,
-                      ),
+                child: Container(
+                  width: 327.w,
+                  height: 53.h,
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color: const Color(0xFFE8E9EC),
+                      width: 1,
                     ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
+                  ),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // TODO: Navigate to Search/filter result once built
+                        },
+                        child: SvgPicture.asset(
                           'assets/icons/search_icon.svg',
                           width: 20.w,
                           height: 20.w,
@@ -216,8 +217,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             BlendMode.srcIn,
                           ),
                         ),
-                        SizedBox(width: 12.w),
-                        Expanded(
+                      ),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            // TODO: Navigate to Search/filter result once built
+                          },
                           child: Text(
                             "Search for cleaning services...",
                             style: TextStyle(
@@ -230,13 +236,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        SvgPicture.asset(
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showFiltersBottomSheet(
+                            context,
+                            initialFilter: "Any",
+                            onApply: (value) {
+                              // TODO: Apply filter and navigate to Search result
+                            },
+                          );
+                        },
+                        child: SvgPicture.asset(
                           'assets/icons/filter_icon.svg',
                           width: 20.w,
                           height: 20.w,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
