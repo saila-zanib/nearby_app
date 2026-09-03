@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import 'cancel_reschedule_screen.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({super.key});
@@ -51,7 +52,12 @@ class BookingDetailsScreen extends StatelessWidget {
               // Provider info card (tappable -> Cancel/Reschedule)
               GestureDetector(
                 onTap: () {
-                  // TODO: Navigate to Cancel / Reschedule once built
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CancelRescheduleScreen(),
+                    ),
+                  );
                 },
                 child: Container(
                   width: 331.w,
