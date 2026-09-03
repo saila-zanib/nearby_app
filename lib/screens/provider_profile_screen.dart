@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import 'reviews_screen.dart';
 import 'photo_gallery_screen.dart';
+import 'select_service_screen.dart';
 
 class ProviderProfileScreen extends StatelessWidget {
   const ProviderProfileScreen({super.key});
@@ -421,7 +422,12 @@ class ProviderProfileScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    // TODO: Navigate to Select services once built
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SelectServiceScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     "Book Now",
