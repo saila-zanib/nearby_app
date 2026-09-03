@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../screens/home_screen.dart';
+import '../screens/my_bookings_screen.dart';
 
 class MainNavScreen extends StatefulWidget {
   const MainNavScreen({super.key});
@@ -23,7 +24,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
         builder: (context) => const HomeScreen(),
       ),
     ),
-    const _PlaceholderTab(label: "Bookings"),
+    const MyBookingsScreen(),
     const _PlaceholderTab(label: "Favorites"),
     const _PlaceholderTab(label: "Profile"),
   ];
@@ -99,10 +100,11 @@ class _MainNavScreenState extends State<MainNavScreen> {
                         BlendMode.srcIn,
                       ),
                     ),
-                    if (index == 0) ...[
+                    if (isSelected) ...[
                       SizedBox(height: 4.h),
                       Text(
                         item.label,
+                        // TODO: switch to Quicksand once font files are added
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 11.57.sp,
