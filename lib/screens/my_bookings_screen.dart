@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants/app_colors.dart';
+import 'booking_details_screen.dart';
 
 class MyBookingsScreen extends StatelessWidget {
   const MyBookingsScreen({super.key});
@@ -70,7 +71,12 @@ class MyBookingsScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 16.h),
                     child: GestureDetector(
                       onTap: () {
-                        // TODO: Navigate to Booking details once built
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const BookingDetailsScreen(),
+                          ),
+                        );
                       },
                       child: Container(
                         width: 330.w,
