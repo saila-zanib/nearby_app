@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../widgets/filters_bottom_sheet.dart';
 import 'search_result_screen.dart';
+import 'provider_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -375,7 +376,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.only(bottom: 16.h),
                           child: GestureDetector(
                             onTap: () {
-                              // TODO: Navigate to Provider profile once built
+                              Navigator.of(context, rootNavigator: true)
+                                  .push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProviderProfileScreen(),
+                                ),
+                              );
                             },
                             child: Container(
                               width: 328.w,
@@ -553,7 +560,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 5.w),
                             child: GestureDetector(
                               onTap: () {
-                                // TODO: Navigate to Provider profile once built
+                                Navigator.of(context, rootNavigator: true)
+                                    .push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProviderProfileScreen(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: 98.h,

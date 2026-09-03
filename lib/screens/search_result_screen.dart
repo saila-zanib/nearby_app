@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../widgets/filters_bottom_sheet.dart';
+import 'provider_profile_screen.dart';
 
 class SearchResultScreen extends StatefulWidget {
   const SearchResultScreen({super.key});
@@ -201,7 +202,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding: EdgeInsets.only(bottom: 12.h),
                     child: GestureDetector(
                       onTap: () {
-                        // TODO: Navigate to Provider profile once built
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const ProviderProfileScreen(),
+                          ),
+                        );
                       },
                       child: Container(
                         width: 333.w,
