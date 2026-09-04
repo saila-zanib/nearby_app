@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -131,7 +132,13 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // TODO: Navigate to Edit profile once built
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EditProfileScreen(),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   width: 67.w,
