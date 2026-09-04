@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import 'edit_profile_screen.dart';
+import 'notifications_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -33,13 +34,22 @@ class ProfileScreen extends StatelessWidget {
                       color: const Color(0xFF2B2A2F),
                     ),
                   ),
-                  SvgPicture.asset(
-                    'assets/icons/green_notification_icon.svg',
-                    width: 16.w,
-                    height: 19.9.h,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFF212121),
-                      BlendMode.srcIn,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationsScreen(),
+                        ),
+                      );
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/green_notification_icon.svg',
+                      width: 16.w,
+                      height: 19.9.h,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFF212121),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ],
@@ -286,6 +296,13 @@ class ProfileScreen extends StatelessWidget {
               _menuItem(
                 iconPath: 'assets/icons/green_notification_icon.svg',
                 label: "Notifications",
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).push(
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationsScreen(),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 12.h),
               _menuItem(
@@ -385,11 +402,13 @@ class ProfileScreen extends StatelessWidget {
   Widget _menuItem({
     required String iconPath,
     required String label,
+    VoidCallback? onTap,
   }) {
     return GestureDetector(
-      onTap: () {
-        // TODO: Navigate once relevant screen is built
-      },
+      onTap: onTap ??
+          () {
+            // TODO: Navigate once relevant screen is built
+          },
       child: Container(
         width: 331.w,
         height: 62.18.h,

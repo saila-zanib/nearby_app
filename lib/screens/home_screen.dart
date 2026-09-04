@@ -5,6 +5,7 @@ import '../constants/app_colors.dart';
 import '../widgets/filters_bottom_sheet.dart';
 import 'search_result_screen.dart';
 import 'provider_profile_screen.dart';
+import 'notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -174,13 +175,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/bell_icon.svg',
-                      width: 22.w,
-                      height: 22.w,
-                      colorFilter: const ColorFilter.mode(
-                        Color(0xFF2B2A2F),
-                        BlendMode.srcIn,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (context) => const NotificationsScreen(),
+                          ),
+                        );
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/bell_icon.svg',
+                        width: 22.w,
+                        height: 22.w,
+                        colorFilter: const ColorFilter.mode(
+                          Color(0xFF2B2A2F),
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ],
