@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import 'cancel_reschedule_screen.dart';
+import 'leave_review_screen.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({super.key});
@@ -218,7 +219,12 @@ class BookingDetailsScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    // TODO: Navigate to Leave a Review once built
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LeaveReviewScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     "Leave a Review",
