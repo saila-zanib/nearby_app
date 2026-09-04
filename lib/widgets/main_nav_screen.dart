@@ -5,6 +5,7 @@ import '../constants/app_colors.dart';
 import '../screens/home_screen.dart';
 import '../screens/my_bookings_screen.dart';
 import '../screens/profile_screen.dart';
+import '../screens/favorites_screen.dart';
 
 class MainNavScreen extends StatefulWidget {
   const MainNavScreen({super.key});
@@ -26,7 +27,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
       ),
     ),
     const MyBookingsScreen(),
-    const _PlaceholderTab(label: "Favorites"),
+    const FavoritesScreen(),
     const ProfileScreen(),
   ];
 
@@ -137,27 +138,4 @@ class _NavItem {
     required this.width,
     required this.height,
   });
-}
-
-class _PlaceholderTab extends StatelessWidget {
-  final String label;
-  const _PlaceholderTab({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Center(
-        child: Text(
-          "$label\n(coming soon)",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textDark,
-          ),
-        ),
-      ),
-    );
-  }
 }
