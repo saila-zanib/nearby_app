@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import 'edit_profile_screen.dart';
 import 'notifications_screen.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -308,6 +309,13 @@ class ProfileScreen extends StatelessWidget {
               _menuItem(
                 iconPath: 'assets/icons/setting_icon.svg',
                 label: "Settings",
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
+                  );
+                },
               ),
 
               SizedBox(height: 24.h),
