@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'working_schedule_screen.dart';
+import 'profile_under_review_screen.dart';
 
-class AddServicesScreen extends StatefulWidget {
-  const AddServicesScreen({super.key});
+class DocumentVerificationScreen extends StatefulWidget {
+  const DocumentVerificationScreen({super.key});
 
   @override
-  State<AddServicesScreen> createState() => _AddServicesScreenState();
+  State<DocumentVerificationScreen> createState() =>
+      _DocumentVerificationScreenState();
 }
 
-class _AddServicesScreenState extends State<AddServicesScreen> {
-  final List<Map<String, String>> _services = [
-    {
-      'icon': 'assets/icons/home_cleaning_icon.svg',
-      'name': 'Home Cleaning',
-      'price': 'Rs30 / hour',
-    },
-    {
-      'icon': 'assets/icons/sofa_cleaning_icon.svg',
-      'name': 'Sofa Cleaning',
-      'price': 'Rs50 / hour',
-    },
-    {
-      'icon': 'assets/icons/kitchen_cleaning_icon.svg',
-      'name': 'Kitchen Cleaning',
-      'price': 'Rs80 / hour',
-    },
+class _DocumentVerificationScreenState
+    extends State<DocumentVerificationScreen> {
+  String? _selectedDocumentType;
+  String? _uploadedFileName;
+
+  final List<String> _documentTypes = const [
+    'CNIC',
+    'Passport',
+    'Driving License',
   ];
+
+  void _pickDocument() {
+    // TODO: Integrate file picker (e.g. file_picker package) for PDF/image upload
+    setState(() {
+      _uploadedFileName = 'document_sample.pdf';
+    });
+  }
+
+  void _submitForReview() {
+    // TODO: Submit provider profile data to backend
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ProfileUnderReviewScreen(),
+      ),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +90,7 @@ class _AddServicesScreenState extends State<AddServicesScreen> {
                   SizedBox(height: 8.h),
                   Center(
                     child: Text(
-                      'Step 2 of 4',
+                      'Step 4 of 4',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -92,83 +103,138 @@ class _AddServicesScreenState extends State<AddServicesScreen> {
                   ),
                   SizedBox(height: 20.h),
                   Center(
-                    child: _ProgressBar(currentStep: 2, totalSteps: 4),
+                    child: _ProgressBar(currentStep: 4, totalSteps: 4),
                   ),
                 ],
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 32.h),
               // Content
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Document Type
                     Text(
-                      'Add Services',
+                      'Document Type',
                       style: TextStyle(
                         fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        height: 1.54,
-                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13.09.sp,
+                        height: 1.5,
+                        color: const Color(0xFF2A2C2B),
                       ),
                     ),
-                    SizedBox(height: 18.h),
-                    Column(
-                      children: _services.map((service) {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: _ServiceCard(
-                            iconPath: service['icon']!,
-                            name: service['name']!,
-                            price: service['price']!,
-                            onEdit: () {
-                              // TODO: Edit this service
-                            },
-                            onDelete: () {
-                              setState(() {
-                                _services.remove(service);
-                              });
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
                     SizedBox(height: 12.h),
-                    // Add New Service button
-                    GestureDetector(
-                      onTap: () {
-                        // TODO: Show add-service form/dialog
-                      },
-                      child: _LocalDottedBorderContainer(
-                        width: 330.w,
-                        height: 49.h,
-                        child: Center(
-                          child: Text(
-                            '+ Add New Service',
+                    Container(
+                      width: 331.w,
+                      height: 60.h,
+                      padding: EdgeInsets.symmetric(horizontal: 19.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14.73.r),
+                        border: Border.all(
+                          color: const Color(0xFFF4F4F4),
+                          width: 0.82,
+                        ),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _selectedDocumentType,
+                          isExpanded: true,
+                          hint: Text(
+                            'Select document type',
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w500,
-                              fontSize: 16.sp,
-                              height: 1.0,
-                              color: const Color(0xFF739147),
+                              fontSize: 13.09.sp,
+                              height: 1.5,
+                              color: const Color(0xFF2A2C2B),
                             ),
+                          ),
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: const Color(0xFF525151),
+                          ),
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13.09.sp,
+                            height: 1.5,
+                            color: const Color(0xFF2A2C2B),
+                          ),
+                          items: _documentTypes.map((type) {
+                            return DropdownMenuItem(
+                              value: type,
+                              child: Text(type),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedDocumentType = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    // Upload Document
+                    Text(
+                      'Upload Document',
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13.09.sp,
+                        height: 1.5,
+                        color: const Color(0xFF2A2C2B),
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+                    GestureDetector(
+                      onTap: _pickDocument,
+                      child: DottedBorderContainer(
+                        width: 330.w,
+                        height: 105.h,
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/upload_icon.svg',
+                                width: 39.w,
+                                height: 32.7.h,
+                              ),
+                              SizedBox(height: 8.h),
+                              Text(
+                                _uploadedFileName ?? 'Tap to Upload',
+                                style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.03.sp,
+                                  height: 1.35,
+                                  color: const Color(0xFF739147),
+                                ),
+                              ),
+                              SizedBox(height: 4.h),
+                              Text(
+                                'PDF, GPG up to 5MB',
+                                style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.03.sp,
+                                  height: 1.35,
+                                  color: const Color(0xFF8E8E8E),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 16.h),
-                    // Next button
+                    SizedBox(height: 40.h),
+                    // Submit for Review button
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const WorkingScheduleScreen(),
-                          ),
-                        );
-                      },
+                      onTap: _submitForReview,
                       child: Container(
                         width: 330.w,
                         height: 49.h,
@@ -178,7 +244,7 @@ class _AddServicesScreenState extends State<AddServicesScreen> {
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
-                          'Next',
+                          'Submit for Review',
                           style: TextStyle(
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500,
@@ -200,122 +266,13 @@ class _AddServicesScreenState extends State<AddServicesScreen> {
   }
 }
 
-class _ServiceCard extends StatelessWidget {
-  final String iconPath;
-  final String name;
-  final String price;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
-
-  const _ServiceCard({
-    required this.iconPath,
-    required this.name,
-    required this.price,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 331.w,
-      height: 79.h,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(11.91.r),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 17.h,
-            left: 14.w,
-            child: Container(
-              width: 40.w,
-              height: 40.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: const Color(0xFFECF7E0),
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              child: SvgPicture.asset(
-                iconPath,
-                width: 23.14.w,
-                height: 23.14.h,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 17.h,
-            left: 71.w,
-            child: SizedBox(
-              width: 194.w,
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.sp,
-                  height: 1.5,
-                  letterSpacing: -0.15,
-                  color: const Color(0xFF1B1A1F),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 44.h,
-            left: 71.w,
-            child: SizedBox(
-              width: 66.w,
-              child: Text(
-                price,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.sp,
-                  height: 1.5,
-                  letterSpacing: -0.12,
-                  color: const Color(0xFF7D7D7D),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 30.72.h,
-            left: 268.w,
-            child: GestureDetector(
-              onTap: onEdit,
-              child: SvgPicture.asset(
-                'assets/icons/edit_pencil_icon.svg',
-                width: 16.w,
-                height: 16.56.h,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 30.h,
-            left: 298.w,
-            child: GestureDetector(
-              onTap: onDelete,
-              child: SvgPicture.asset(
-                'assets/icons/delete_icon.svg',
-                width: 18.w,
-                height: 18.h,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LocalDottedBorderContainer extends StatelessWidget {
+class DottedBorderContainer extends StatelessWidget {
   final Widget child;
   final double width;
   final double height;
 
-  const _LocalDottedBorderContainer({
+  const DottedBorderContainer({
+    super.key,
     required this.child,
     required this.width,
     required this.height,

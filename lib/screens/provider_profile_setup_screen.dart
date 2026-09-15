@@ -96,7 +96,6 @@ class _ProviderProfileSetupScreenState
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  // Progress bar - centered
                   Center(
                     child: _ProgressBar(currentStep: 1, totalSteps: 4),
                   ),
@@ -333,7 +332,7 @@ class _ProgressBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(totalSteps, (index) {
               final stepNumber = index + 1;
-              final isActive = stepNumber <= currentStep;
+              final isActive = stepNumber == currentStep;
               return Container(
                 width: 21.33.w,
                 height: 21.33.w,
@@ -351,7 +350,7 @@ class _ProgressBar extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontSize: 12.38.sp,
                     height: 1.54,
-                    color: Colors.white,
+                    color: isActive ? Colors.white : const Color(0xFF9A9A9A),
                   ),
                 ),
               );
