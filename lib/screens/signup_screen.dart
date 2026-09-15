@@ -394,7 +394,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const OtpVerificationScreen(),
+                          builder: (context) =>
+                              OtpVerificationScreen(role: _selectedRole),
                         ),
                       );
                     },

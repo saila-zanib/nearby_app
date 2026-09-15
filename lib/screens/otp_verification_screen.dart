@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../widgets/main_nav_screen.dart';
+import 'provider_profile_setup_screen.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  final String role;
+  const OtpVerificationScreen({super.key, required this.role});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -18,9 +20,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   String get _otp => _otpController.text;
 
-  void _onChanged(String value) {
-    setState(() {});
-    if (value.length == 6) {
+  void _navigateAfterVerification() {
+    if (widget.role == "Provider") {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProviderProfileSetupScreen(),
+        ),
+        (route) => false,
+      );
+    } else {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -28,6 +37,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ),
         (route) => false,
       );
+    }
+  }
+
+  void _onChanged(String value) {
+    setState(() {});
+    if (value.length == 6) {
+      _navigateAfterVerification();
     }
   }
 
@@ -283,15 +299,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                       elevation: 0,
                     ),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MainNavScreen(),
-                        ),
-                        (route) => false,
-                      );
-                    },
+                    onPressed: _navigateAfterVerification,
                     child: Text(
                       "Verify",
                       style: TextStyle(
