@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../widgets/main_nav_screen.dart';
+import '../widgets/provider_main_nav_screen.dart';
 
 class ProfileUnderReviewScreen extends StatelessWidget {
   const ProfileUnderReviewScreen({super.key});
@@ -10,7 +10,7 @@ class ProfileUnderReviewScreen extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (context) => const MainNavScreen(),
+        builder: (context) => const ProviderMainNavScreen(),
       ),
       (route) => false,
     );
