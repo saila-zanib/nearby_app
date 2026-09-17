@@ -5,6 +5,7 @@ import 'edit_services_pricing_screen.dart';
 import 'edit_availability_screen.dart';
 import 'photo_gallery_management_screen.dart';
 import 'reviews_received_screen.dart';
+import 'provider_account_settings_screen.dart';
 
 class ProviderOwnProfileScreen extends StatelessWidget {
   const ProviderOwnProfileScreen({super.key});
@@ -55,47 +56,69 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                       ),
                       Positioned(
                         right: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const EditAvailabilityScreen(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            width: 67.w,
-                            height: 22.69.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFECF7E0),
-                              borderRadius: BorderRadius.circular(6.r),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/edit_pencil_provider_screen.svg',
-                                  width: 9.w,
-                                  height: 9.h,
-                                ),
-                                SizedBox(width: 4.w),
-                                Text(
-                                  'edit',
-                                  style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 9.41.sp,
-                                    height: 1.0,
-                                    color: const Color(0xFF739147),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProviderAccountSettingsScreen(),
                                   ),
-                                ),
-                              ],
+                                );
+                              },
+                              child: Icon(
+                                Icons.settings_outlined,
+                                size: 20.sp,
+                                color: const Color(0xFF2B2A2F),
+                              ),
                             ),
-                          ),
+                            SizedBox(width: 12.w),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const EditAvailabilityScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 67.w,
+                                height: 22.69.h,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFECF7E0),
+                                  borderRadius: BorderRadius.circular(6.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/icons/edit_pencil_provider_screen.svg',
+                                      width: 9.w,
+                                      height: 9.h,
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      'edit',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 9.41.sp,
+                                        height: 1.0,
+                                        color: const Color(0xFF739147),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
