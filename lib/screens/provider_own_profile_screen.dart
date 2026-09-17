@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'edit_services_pricing_screen.dart';
+import 'edit_availability_screen.dart';
 
 class ProviderOwnProfileScreen extends StatelessWidget {
   const ProviderOwnProfileScreen({super.key});
@@ -54,7 +55,13 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                         right: 0,
                         child: GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to Edit Profile screen
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EditAvailabilityScreen(),
+                              ),
+                            );
                           },
                           child: Container(
                             width: 67.w,
@@ -447,7 +454,12 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                 child: GestureDetector(
                   onTap: () {
-                    // TODO: Navigate to Edit Profile screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditAvailabilityScreen(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: 330.w,
