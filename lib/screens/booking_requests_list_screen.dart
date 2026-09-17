@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'booking_request_details_screen.dart';
 
 class BookingRequestsListScreen extends StatefulWidget {
   const BookingRequestsListScreen({super.key});
@@ -17,18 +18,21 @@ class _BookingRequestsListScreenState
       'name': 'Priya Sharma',
       'service': 'Home Cleaning',
       'dateTime': 'Tue, 22 Apr 2025    10:00 AM',
+      'address': '123 Green Park, Sector 15, Noida, Uttar Pradesh 201301',
       'avatarColor': const Color(0xFFD9EDF5),
     },
     {
       'name': 'Neha Khan',
       'service': 'AC Repair',
       'dateTime': 'Tue, 22 Apr 2025    02:00 PM',
+      'address': '45 Sector 18, Noida, Uttar Pradesh 201301',
       'avatarColor': const Color(0xFFC9C3ED),
     },
     {
       'name': 'Rohit',
       'service': 'Plumbing',
       'dateTime': 'Wed, 23 Apr 2025    11:00 AM',
+      'address': '78 Model Town, Faisalabad, Punjab 38000',
       'avatarColor': const Color(0xFFF6DFC3),
     },
   ];
@@ -91,6 +95,19 @@ class _BookingRequestsListScreenState
                       service: request['service'],
                       dateTime: request['dateTime'],
                       avatarColor: request['avatarColor'],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingRequestDetailsScreen(
+                              customerName: request['name'],
+                              service: request['service'],
+                              dateTime: request['dateTime'],
+                              address: request['address'],
+                            ),
+                          ),
+                        );
+                      },
                       onDecline: () {
                         setState(() {
                           _requests.removeAt(index);
@@ -118,6 +135,7 @@ class _BookingRequestCard extends StatelessWidget {
   final String service;
   final String dateTime;
   final Color avatarColor;
+  final VoidCallback onTap;
   final VoidCallback onDecline;
   final VoidCallback onAccept;
 
@@ -126,154 +144,158 @@ class _BookingRequestCard extends StatelessWidget {
     required this.service,
     required this.dateTime,
     required this.avatarColor,
+    required this.onTap,
     required this.onDecline,
     required this.onAccept,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 331.w,
-      height: 119.h,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(11.91.r),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 15.5.h,
-            left: 12.5.w,
-            child: Container(
-              width: 43.w,
-              height: 43.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: avatarColor,
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                'assets/icons/provider_person_white_icon.svg',
-                width: 20.w,
-                height: 23.68.h,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 14.h,
-            left: 69.w,
-            child: SizedBox(
-              width: 194.w,
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.sp,
-                  height: 1.5,
-                  letterSpacing: -0.15,
-                  color: const Color(0xFF1B1A1F),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 41.h,
-            left: 69.w,
-            child: SizedBox(
-              width: 86.w,
-              child: Text(
-                service,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.sp,
-                  height: 1.5,
-                  letterSpacing: -0.12,
-                  color: const Color(0xFF7D7D7D),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 61.h,
-            left: 69.w,
-            child: SizedBox(
-              width: 188.w,
-              child: Text(
-                dateTime,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 11.sp,
-                  height: 1.5,
-                  color: const Color(0xFF919191),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 51.h,
-            right: 15.w,
-            child: Icon(
-              Icons.chevron_right,
-              size: 18.sp,
-              color: const Color(0xFF525151),
-            ),
-          ),
-          Positioned(
-            top: 86.h,
-            left: 198.w,
-            child: GestureDetector(
-              onTap: onDecline,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 331.w,
+        height: 119.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(11.91.r),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 15.5.h,
+              left: 12.5.w,
               child: Container(
-                width: 57.w,
-                height: 23.h,
+                width: 43.w,
+                height: 43.h,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFCECE).withOpacity(0.75),
-                  borderRadius: BorderRadius.circular(5.r),
+                  color: avatarColor,
+                  shape: BoxShape.circle,
                 ),
+                child: SvgPicture.asset(
+                  'assets/icons/provider_person_white_icon.svg',
+                  width: 20.w,
+                  height: 23.68.h,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 14.h,
+              left: 69.w,
+              child: SizedBox(
+                width: 194.w,
                 child: Text(
-                  'Decline',
+                  name,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
-                    fontSize: 10.sp,
+                    fontSize: 15.sp,
                     height: 1.5,
-                    color: const Color(0xFFED0000),
+                    letterSpacing: -0.15,
+                    color: const Color(0xFF1B1A1F),
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 86.h,
-            left: 261.w,
-            child: GestureDetector(
-              onTap: onAccept,
-              child: Container(
-                width: 57.w,
-                height: 23.h,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFB8F267),
-                  borderRadius: BorderRadius.circular(5.r),
-                ),
+            Positioned(
+              top: 41.h,
+              left: 69.w,
+              child: SizedBox(
+                width: 86.w,
                 child: Text(
-                  'Accept',
+                  service,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
-                    fontSize: 10.sp,
+                    fontSize: 12.sp,
                     height: 1.5,
-                    color: Colors.black,
+                    letterSpacing: -0.12,
+                    color: const Color(0xFF7D7D7D),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+            Positioned(
+              top: 61.h,
+              left: 69.w,
+              child: SizedBox(
+                width: 188.w,
+                child: Text(
+                  dateTime,
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11.sp,
+                    height: 1.5,
+                    color: const Color(0xFF919191),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 51.h,
+              right: 15.w,
+              child: Icon(
+                Icons.chevron_right,
+                size: 18.sp,
+                color: const Color(0xFF525151),
+              ),
+            ),
+            Positioned(
+              top: 86.h,
+              left: 198.w,
+              child: GestureDetector(
+                onTap: onDecline,
+                child: Container(
+                  width: 57.w,
+                  height: 23.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFCECE).withOpacity(0.75),
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Text(
+                    'Decline',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10.sp,
+                      height: 1.5,
+                      color: const Color(0xFFED0000),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 86.h,
+              left: 261.w,
+              child: GestureDetector(
+                onTap: onAccept,
+                child: Container(
+                  width: 57.w,
+                  height: 23.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFB8F267),
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Text(
+                    'Accept',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10.sp,
+                      height: 1.5,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
