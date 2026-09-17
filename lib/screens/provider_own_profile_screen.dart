@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'edit_services_pricing_screen.dart';
 import 'edit_availability_screen.dart';
+import 'photo_gallery_management_screen.dart';
+import 'reviews_received_screen.dart';
 
 class ProviderOwnProfileScreen extends StatelessWidget {
   const ProviderOwnProfileScreen({super.key});
@@ -324,7 +326,13 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // TODO: Navigate to full gallery
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PhotoGalleryManagementScreen(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'See all',
@@ -377,7 +385,13 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // TODO: Navigate to full reviews list
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ReviewsReceivedScreen(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'See all',
