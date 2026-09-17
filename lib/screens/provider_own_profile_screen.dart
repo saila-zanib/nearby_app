@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'edit_services_pricing_screen.dart';
 
 class ProviderOwnProfileScreen extends StatelessWidget {
   const ProviderOwnProfileScreen({super.key});
@@ -243,33 +244,51 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 14.h),
-                    // Services Offered
-                    Container(
-                      width: 330.w,
-                      padding: EdgeInsets.all(16.w),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Services Offered',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14.sp,
-                              color: const Color(0xFF1B1A1F),
-                            ),
+                    // Services Offered - tappable, navigates to Edit Services & Pricing
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const EditServicesPricingScreen(),
                           ),
-                          SizedBox(height: 12.h),
-                          _ServiceRow(name: 'Regular cleaning', price: 'Rs. 1,400'),
-                          Divider(height: 24.h, color: const Color(0xFFF4F4F4)),
-                          _ServiceRow(name: 'Deep cleaning', price: 'Rs. 2,200'),
-                          Divider(height: 24.h, color: const Color(0xFFF4F4F4)),
-                          _ServiceRow(name: 'Kitchen cleaning', price: 'Rs. 1,800'),
-                        ],
+                        );
+                      },
+                      child: Container(
+                        width: 330.w,
+                        padding: EdgeInsets.all(16.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Services Offered',
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14.sp,
+                                color: const Color(0xFF1B1A1F),
+                              ),
+                            ),
+                            SizedBox(height: 12.h),
+                            _ServiceRow(
+                                name: 'Regular cleaning', price: 'Rs. 1,400'),
+                            Divider(
+                                height: 24.h,
+                                color: const Color(0xFFF4F4F4)),
+                            _ServiceRow(
+                                name: 'Deep cleaning', price: 'Rs. 2,200'),
+                            Divider(
+                                height: 24.h,
+                                color: const Color(0xFFF4F4F4)),
+                            _ServiceRow(
+                                name: 'Kitchen cleaning', price: 'Rs. 1,800'),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 14.h),
