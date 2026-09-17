@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'my_bookings_provider_screen.dart';
 
 class ProviderHomeScreen extends StatefulWidget {
   const ProviderHomeScreen({super.key});
@@ -232,7 +233,13 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                       description:
                           'Manage your upcoming and past bookings.',
                       onTap: () {
-                        // TODO: Navigate to My Bookings screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const MyBookingsProviderScreen(),
+                          ),
+                        );
                       },
                     ),
                   ],
