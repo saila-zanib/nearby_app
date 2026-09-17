@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_colors.dart';
 import '../screens/provider_home_screen.dart';
 import '../screens/booking_requests_list_screen.dart';
+import '../screens/provider_own_profile_screen.dart';
 
 class ProviderMainNavScreen extends StatefulWidget {
   const ProviderMainNavScreen({super.key});
@@ -26,7 +27,7 @@ class _ProviderMainNavScreenState extends State<ProviderMainNavScreen> {
     ),
     const BookingRequestsListScreen(),
     const _PlaceholderTab(label: "Favorites"),
-    const _PlaceholderTab(label: "Profile"),
+    const ProviderOwnProfileScreen(),
   ];
 
   final List<_NavItem> _navItems = const [
