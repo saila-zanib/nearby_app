@@ -23,7 +23,7 @@ class _DocumentVerificationScreenState
   ];
 
   void _pickDocument() {
-    // TODO: Integrate file picker (e.g. file_picker package) for PDF/image upload
+    // TODO: Integrate real file picker once compileSdk/AGP issue is resolved
     setState(() {
       _uploadedFileName = 'document_sample.pdf';
     });

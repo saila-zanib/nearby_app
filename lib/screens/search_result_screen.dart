@@ -6,7 +6,8 @@ import '../widgets/filters_bottom_sheet.dart';
 import 'provider_profile_screen.dart';
 
 class SearchResultScreen extends StatefulWidget {
-  const SearchResultScreen({super.key});
+  final String? categoryFilter;
+  const SearchResultScreen({super.key, this.categoryFilter});
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
@@ -101,16 +102,30 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Search Results",
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5,
-                  letterSpacing: 0,
-                  color: const Color(0xFF2B2A2F),
-                ),
+              // Header
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: SvgPicture.asset(
+                      'assets/icons/back_arrow.svg',
+                      width: 24.w,
+                      height: 24.h,
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Text(
+                    widget.categoryFilter ?? "Search Results",
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      letterSpacing: 0,
+                      color: const Color(0xFF2B2A2F),
+                    ),
+                  ),
+                ],
               ),
 
               SizedBox(height: 16.h),

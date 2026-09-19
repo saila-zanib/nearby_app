@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'my_bookings_provider_screen.dart';
+import 'booking_requests_list_screen.dart';
 
 class ProviderHomeScreen extends StatefulWidget {
   const ProviderHomeScreen({super.key});
@@ -223,7 +224,13 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                       description:
                           'View and respond to new boking requests.',
                       onTap: () {
-                        // TODO: Navigate to Booking Requests screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const BookingRequestsListScreen(),
+                          ),
+                        );
                       },
                     ),
                     SizedBox(height: 16.h),

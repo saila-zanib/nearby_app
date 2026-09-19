@@ -308,57 +308,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: _categories.map((category) {
-                    return Container(
-                      width: 116.w,
-                      height: 159.h,
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14.r),
-                      ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            category['image']!,
-                            width: 116.w,
-                            height: 106.h,
-                            fit: BoxFit.cover,
-                          ),
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 6.w),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  _categoryIcon(
-                                    category['label']!,
-                                    category['icon']!,
-                                  ),
-                                  SizedBox(width: 4.w),
-                                  Flexible(
-                                    child: Text(
-                                      category['label']!,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontFamily: 'Inter',
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w600,
-                                        height: 1.3,
-                                        letterSpacing: -0.01,
-                                        color: const Color(0xFF1B1A1F),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchResultScreen(
+                              categoryFilter:
+                                  category['label']!.replaceAll('\n', ' '),
                             ),
                           ),
-                        ],
+                        );
+                      },
+                      child: Container(
+                        width: 116.w,
+                        height: 159.h,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(14.r),
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              category['image']!,
+                              width: 116.w,
+                              height: 106.h,
+                              fit: BoxFit.cover,
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 6.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    _categoryIcon(
+                                      category['label']!,
+                                      category['icon']!,
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Flexible(
+                                      child: Text(
+                                        category['label']!,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.3,
+                                          letterSpacing: -0.01,
+                                          color: const Color(0xFF1B1A1F),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),

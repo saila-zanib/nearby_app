@@ -12,17 +12,12 @@ class SelectDateTimeScreen extends StatefulWidget {
 }
 
 class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
-  int _selectedDateIndex = 2; // Wed 7 selected by default
+  late final List<DateTime> _dates;
+  late int _selectedDateIndex;
   int _selectedTimeIndex = 1; // 10:00 AM selected by default
 
-  final List<Map<String, String>> _dates = const [
-    {'day': 'Mon', 'date': '5'},
-    {'day': 'Tue', 'date': '6'},
-    {'day': 'Wed', 'date': '7'},
-    {'day': 'Thu', 'date': '8'},
-    {'day': 'Fri', 'date': '9'},
-    {'day': 'Sat', 'date': '10'},
-    {'day': 'Sun', 'date': '11'},
+  final List<String> _dayLabels = const [
+    'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
   ];
 
   final List<String> _times = const [
@@ -39,6 +34,25 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
     '07:00 PM',
     '08:00 PM',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final today = DateTime.now();
+    final todayDateOnly = DateTime(today.year, today.month, today.day);
+    // Show 3 days before today, today, and 3 days after — today centered
+    _dates = List.generate(
+      7,
+      (index) => todayDateOnly.add(Duration(days: index - 3)),
+    );
+    _selectedDateIndex = 3; // today is always at index 3
+  }
+
+  bool _isPastDate(DateTime date) {
+    final today = DateTime.now();
+    final todayDateOnly = DateTime(today.year, today.month, today.day);
+    return date.isBefore(todayDateOnly);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +181,13 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
                 children: List.generate(_dates.length, (index) {
                   final date = _dates[index];
                   final isSelected = _selectedDateIndex == index;
+                  final isPast = _isPastDate(date);
+                  final dayLabel = _dayLabels[(date.weekday - 1) % 7];
+
                   return GestureDetector(
-                    onTap: () => setState(() => _selectedDateIndex = index),
+                    onTap: isPast
+                        ? null
+                        : () => setState(() => _selectedDateIndex = index),
                     child: Container(
                       width: 44.w,
                       height: 63.h,
@@ -189,7 +208,7 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            date['day']!,
+                            dayLabel,
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 10.sp,
@@ -198,12 +217,14 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
                               letterSpacing: -0.01,
                               color: isSelected
                                   ? Colors.white
-                                  : const Color(0xFF5C5D61),
+                                  : isPast
+                                      ? const Color(0xFFBCA89A)
+                                      : const Color(0xFF5C5D61),
                             ),
                           ),
                           SizedBox(height: 6.h),
                           Text(
-                            date['date']!,
+                            '${date.day}',
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 15.sp,
@@ -212,7 +233,9 @@ class _SelectDateTimeScreenState extends State<SelectDateTimeScreen> {
                               letterSpacing: -0.01,
                               color: isSelected
                                   ? Colors.white
-                                  : const Color(0xFF020202),
+                                  : isPast
+                                      ? const Color(0xFFBCA89A)
+                                      : const Color(0xFF020202),
                             ),
                           ),
                         ],

@@ -14,7 +14,7 @@ class _WorkingScheduleScreenState extends State<WorkingScheduleScreen> {
   final Set<String> _selectedDays = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri'};
 
   String _workingHours = '09:00 AM - 06:00 PM';
-  String _serviceArea = 'Within 10 Km';
+  double _serviceRadius = 10;
 
   void _toggleDay(String day) {
     setState(() {
@@ -45,6 +45,134 @@ class _WorkingScheduleScreenState extends State<WorkingScheduleScreen> {
       _workingHours =
           '${startTime.format(context)} - ${endTime.format(context)}';
     });
+  }
+
+  Future<void> _selectServiceArea() async {
+    double tempRadius = _serviceRadius;
+
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Service Area / Radius',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      color: const Color(0xFF1B1A1F),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'Select how far you are willing to travel for bookings.',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: const Color(0xFF7E7E93),
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Center(
+                    child: Text(
+                      'Within ${tempRadius.round()} Km',
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.sp,
+                        color: const Color(0xFF95D041),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: const Color(0xFF95D041),
+                      inactiveTrackColor: const Color(0xFFE4E4E4),
+                      thumbColor: const Color(0xFF95D041),
+                      overlayColor: const Color(0xFF95D041).withOpacity(0.2),
+                      valueIndicatorColor: const Color(0xFF95D041),
+                    ),
+                    child: Slider(
+                      value: tempRadius,
+                      min: 0,
+                      max: 50,
+                      divisions: 50,
+                      label: '${tempRadius.round()} Km',
+                      onChanged: (value) {
+                        setModalState(() {
+                          tempRadius = value;
+                        });
+                      },
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '0 Km',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 11.sp,
+                          color: const Color(0xFF7E7E93),
+                        ),
+                      ),
+                      Text(
+                        '50 Km',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 11.sp,
+                          color: const Color(0xFF7E7E93),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _serviceRadius = tempRadius;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 49.h,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFB8F267),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Text(
+                        'Confirm',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.sp,
+                          color: const Color(0xFF1B1A1F),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -269,9 +397,7 @@ class _WorkingScheduleScreenState extends State<WorkingScheduleScreen> {
                     ),
                     SizedBox(height: 12.h),
                     GestureDetector(
-                      onTap: () {
-                        // TODO: Show service area/radius picker
-                      },
+                      onTap: _selectServiceArea,
                       child: Container(
                         width: 331.w,
                         height: 60.h,
@@ -288,7 +414,7 @@ class _WorkingScheduleScreenState extends State<WorkingScheduleScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              _serviceArea,
+                              'Within ${_serviceRadius.round()} Km',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w500,
