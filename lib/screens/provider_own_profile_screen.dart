@@ -55,70 +55,22 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        right: 0,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProviderAccountSettingsScreen(),
-                                  ),
-                                );
-                              },
-                              child: Icon(
-                                Icons.settings_outlined,
-                                size: 20.sp,
-                                color: const Color(0xFF2B2A2F),
+                        right: 4.w,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ProviderAccountSettingsScreen(),
                               ),
-                            ),
-                            SizedBox(width: 12.w),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EditAvailabilityScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 67.w,
-                                height: 22.69.h,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFECF7E0),
-                                  borderRadius: BorderRadius.circular(6.r),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/icons/edit_pencil_provider_screen.svg',
-                                      width: 9.w,
-                                      height: 9.h,
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      'edit',
-                                      style: TextStyle(
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 9.41.sp,
-                                        height: 1.0,
-                                        color: const Color(0xFF739147),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Icon(
+                            Icons.settings_outlined,
+                            size: 20.sp,
+                            color: const Color(0xFF2B2A2F),
+                          ),
                         ),
                       ),
                     ],
@@ -126,7 +78,7 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20.h),
-              // Top card: image + name/rating/distance/availability
+              // Top card: image + name/rating/distance/availability + edit
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Container(
@@ -206,23 +158,71 @@ class ProviderOwnProfileScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 6.h),
                             Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  width: 8.w,
-                                  height: 8.h,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF9AD448),
-                                    shape: BoxShape.circle,
-                                  ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 8.w,
+                                      height: 8.h,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFF9AD448),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      'Available Today',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12.sp,
+                                        color: const Color(0xFF95D041),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 4.w),
-                                Text(
-                                  'Available Today',
-                                  style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12.sp,
-                                    color: const Color(0xFF95D041),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const EditAvailabilityScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 20.h,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.w),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFECF7E0),
+                                      borderRadius:
+                                          BorderRadius.circular(6.r),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/icons/edit_pencil_provider_screen.svg',
+                                          width: 8.w,
+                                          height: 8.h,
+                                        ),
+                                        SizedBox(width: 3.w),
+                                        Text(
+                                          'edit',
+                                          style: TextStyle(
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 9.sp,
+                                            color: const Color(0xFF739147),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
