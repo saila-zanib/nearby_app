@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'profile_under_review_screen.dart';
 
 class DocumentVerificationScreen extends StatefulWidget {
@@ -22,11 +23,15 @@ class _DocumentVerificationScreenState
     'Driving License',
   ];
 
-  void _pickDocument() {
-    // TODO: Integrate real file picker once compileSdk/AGP issue is resolved
-    setState(() {
-      _uploadedFileName = 'document_sample.pdf';
-    });
+  Future<void> _pickDocument() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _uploadedFileName = pickedFile.name;
+      });
+    }
   }
 
   void _submitForReview() {
@@ -205,19 +210,26 @@ class _DocumentVerificationScreenState
                                 height: 32.7.h,
                               ),
                               SizedBox(height: 8.h),
-                              Text(
-                                _uploadedFileName ?? 'Tap to Upload',
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.03.sp,
-                                  height: 1.35,
-                                  color: const Color(0xFF739147),
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 16.w),
+                                child: Text(
+                                  _uploadedFileName ?? 'Tap to Upload',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.03.sp,
+                                    height: 1.35,
+                                    color: const Color(0xFF739147),
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 4.h),
                               Text(
-                                'PDF, GPG up to 5MB',
+                                'PDF, JPG, PNG up to 5MB',
                                 style: TextStyle(
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w400,
