@@ -85,42 +85,66 @@ class _BookingRequestsListScreenState
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: ListView.separated(
-                  itemCount: _requests.length,
-                  separatorBuilder: (_, _) => SizedBox(height: 12.h),
-                  itemBuilder: (context, index) {
-                    final request = _requests[index];
-                    return _BookingRequestCard(
-                      name: request['name'],
-                      service: request['service'],
-                      dateTime: request['dateTime'],
-                      avatarColor: request['avatarColor'],
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BookingRequestDetailsScreen(
-                              customerName: request['name'],
-                              service: request['service'],
-                              dateTime: request['dateTime'],
-                              address: request['address'],
+                child: _requests.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.check_circle_outline,
+                              size: 48.sp,
+                              color: const Color(0xFFBDBDBD),
                             ),
-                          ),
-                        );
-                      },
-                      onDecline: () {
-                        setState(() {
-                          _requests.removeAt(index);
-                        });
-                      },
-                      onAccept: () {
-                        setState(() {
-                          _requests.removeAt(index);
-                        });
-                      },
-                    );
-                  },
-                ),
+                            SizedBox(height: 12.h),
+                            Text(
+                              'No booking requests available',
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: const Color(0xFF8E8E8E),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.separated(
+                        itemCount: _requests.length,
+                        separatorBuilder: (_, _) => SizedBox(height: 12.h),
+                        itemBuilder: (context, index) {
+                          final request = _requests[index];
+                          return _BookingRequestCard(
+                            name: request['name'],
+                            service: request['service'],
+                            dateTime: request['dateTime'],
+                            avatarColor: request['avatarColor'],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BookingRequestDetailsScreen(
+                                    customerName: request['name'],
+                                    service: request['service'],
+                                    dateTime: request['dateTime'],
+                                    address: request['address'],
+                                  ),
+                                ),
+                              );
+                            },
+                            onDecline: () {
+                              setState(() {
+                                _requests.removeAt(index);
+                              });
+                            },
+                            onAccept: () {
+                              setState(() {
+                                _requests.removeAt(index);
+                              });
+                            },
+                          );
+                        },
+                      ),
               ),
             ),
           ],
